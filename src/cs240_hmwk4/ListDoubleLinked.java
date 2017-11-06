@@ -7,13 +7,12 @@ package cs240_hmwk4;
  * @author bjhau
  *
  */
-public class ListLinked<T> implements ListInterface<T> {
-
+public class ListDoubleLinked<T> implements ListInterface<T> {
 	private Node<T> front;
 	private Node<T> back;
 	private int count = 0;
 	
-	public ListLinked()
+	public ListDoubleLinked()
 	{
 		front = null;
 		back = front;
@@ -21,8 +20,8 @@ public class ListLinked<T> implements ListInterface<T> {
 	
 	@Override
 	public void add(T newEntry) {
-		Node<T> newNode = new Node<T>(null, newEntry);
-		front.setLink(newNode);
+		Node<T> newNode = new Node<T>(null, newEntry, front);
+		front.setFLink(newNode);
 		front = newNode;
 		count ++;
 	}
@@ -32,14 +31,14 @@ public class ListLinked<T> implements ListInterface<T> {
 		Node<T> temp = back;
 		for(int i =0; i < newPosition; i++)
 		{
-			if (temp.getLink() != null)
+			if (temp.getFLink() != null)
 			{
-				temp = temp.getLink();
+				temp = temp.getFLink();
 
 			}
 		}
-		Node<T> newNode = new Node<T>(temp.getLink(), newEntry);
-		temp.setLink(newNode);
+		Node<T> newNode = new Node<T>(temp.getFLink(), newEntry, temp);
+		temp.setFLink(newNode);
 		count ++;
 	}
 
@@ -52,10 +51,10 @@ public class ListLinked<T> implements ListInterface<T> {
 			{
 				for(int i =0; i < givenPosition; i++)
 				{
-					temp = temp.getLink();
+					temp = temp.getFLink();
 				}
 			T tempD = temp.getData();
-			temp.setLink(temp.getLink());
+			temp.setLink(temp.getFLink());
 			count --;
 			return tempD;
 			}
@@ -67,12 +66,13 @@ public class ListLinked<T> implements ListInterface<T> {
 	public void clear() {
 		if(!isEmpty())
 		{
-			Node<T> temp = back.getLink();
+			Node<T> temp = back.getFLink();
 			for (int i = 0; i < count; i++)
 			{
-				temp = back.getLink();
+				temp = back.getFLink();
 				back.setData(null);
-				back.setLink(null);
+				back.setFLink(null);
+				back.setBLink(null);
 				back = temp;
 			}
 			count = 0;
@@ -89,7 +89,7 @@ public class ListLinked<T> implements ListInterface<T> {
 			{
 				for (int i = 0; i < givenPosition; i++)
 				{
-					temp = temp.getLink();
+					temp = temp.getFLink();
 				}
 				tempD = temp.getData();
 				temp.setData(newEntry);
@@ -108,7 +108,7 @@ public class ListLinked<T> implements ListInterface<T> {
 			{
 				for (int i = 0; i < givenPosition; i++)
 				{
-					temp = temp.getLink();
+					temp = temp.getFLink();
 				}
 				return temp.getData();
 			}
@@ -127,7 +127,7 @@ public class ListLinked<T> implements ListInterface<T> {
 			for (int i = 0; i < count; i++)
 			{
 				array[i] = temp.getData();
-				temp = temp.getLink();
+				temp = temp.getFLink();
 			}
 			return array;
 		}
@@ -139,13 +139,13 @@ public class ListLinked<T> implements ListInterface<T> {
 		if(!isEmpty())
 		{
 			Node<T> temp = back;
-			while ( temp.getLink()!= null)
+			while ( temp.getFLink()!= null)
 			{
 				if (temp.getData()==anEntry)
 				{
 					return true;
 				}
-				temp = temp.getLink();
+				temp = temp.getFLink();
 			}
 		}
 		return false;
@@ -167,4 +167,5 @@ public class ListLinked<T> implements ListInterface<T> {
 			return false;
 		}
 	}
+
 }
