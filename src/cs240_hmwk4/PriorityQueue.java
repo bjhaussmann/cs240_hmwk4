@@ -76,11 +76,9 @@ public class PriorityQueue<T extends Comparable<? super T>> implements PriorityQ
 	 */
 	@Override
 	public T peek() {
-		if (isEmpty())
-		{
+		if (isEmpty()) {
 			return null;
-		}
-		else {
+		} else {
 			return front.getData();
 		}
 	}
@@ -92,11 +90,9 @@ public class PriorityQueue<T extends Comparable<? super T>> implements PriorityQ
 	 */
 	@Override
 	public boolean isEmpty() {
-		if ( back.getLink() == front)
-		{
+		if (back.getLink() == front) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -110,8 +106,7 @@ public class PriorityQueue<T extends Comparable<? super T>> implements PriorityQ
 	public int getSize() {
 		Node<T> current = back;
 		int counter = 0;
-		while (current.getLink() != front)
-		{
+		while (current.getLink() != front) {
 			current = current.getLink();
 			counter++;
 		}
@@ -123,8 +118,7 @@ public class PriorityQueue<T extends Comparable<? super T>> implements PriorityQ
 	public void clear() {
 		Node<T> current = back;
 		Node<T> next = current;
-		while ( current.getLink() != null)
-		{
+		while (current.getLink() != null) {
 			next = current.getLink();
 			current.setData(null);
 			current.setLink(null);
