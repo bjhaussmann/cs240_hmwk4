@@ -109,6 +109,7 @@ public class ListFixedSize<T> implements ListInterface<T> {
 	public T[] toArray() {
 		if(!isEmpty())
 		{
+			@SuppressWarnings("unchecked")
 			T array[] = (T[]) new Object[count];
 			for (int i = 0; i < count; i ++)
 			{
