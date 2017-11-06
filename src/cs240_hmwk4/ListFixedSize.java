@@ -125,20 +125,19 @@ public class ListFixedSize<T> implements ListInterface<T> {
 
 	@Override
 	public boolean contains(T anEntry) {
-		boolean found = false;
 		if (!isEmpty())
 		{
 			int counter = 0;
-			while (found == false || counter < count)
+			while (counter < count)
 			{
 				if(list[counter] == anEntry)
 				{
-					found = true;
+					return true;
 				}
 				counter ++;
 			}
 		}
-		return found;
+		return false;
 	}
 
 	@Override
